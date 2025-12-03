@@ -1,5 +1,9 @@
-// Complete variable definitions and random functions
-
+/*
+          Name: Amshika Gautam
+          File: index.html
+          Date: 3 December 2023
+          Lab 4 ` Part 1 - Silly story genearator
+        */
 const customName = document.getElementById("custom-name");
 const generateBtn = document.querySelector(".generate");
 const story = document.querySelector(".story");
