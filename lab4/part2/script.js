@@ -46,3 +46,20 @@ function updateDisplayedImage(e) {
   displayedImage.src = e.target.src;
   displayedImage.alt = e.target.alt;
 }
+
+// Wire up the button for the darken/lighten effect 
+
+// Add a click event listener on the button
+btn.addEventListener("click", () => {
+  // change text to "Lighten" and make the overlay darker if contains dark class
+  if (btn.classList.contains("dark")) {
+    btn.textContent = "Lighten";
+    overlay.style.backgroundColor = "rgb(0 0 0 / 0.5)";
+  } else {
+    // Else, change text to "Darken" and make the overlay lighter
+    btn.textContent = "Darken";
+    overlay.style.backgroundColor = "rgb(0 0 0 / 0)";
+  }
+  // Toggle the class ready for the next button press
+  btn.classList.toggle("dark");
+});
