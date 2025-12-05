@@ -40,4 +40,9 @@ for (const image of images) {
   });
 }
 
+//Create function to update displayed image
 
+function updateDisplayedImage(e) {
+  displayedImage.src = e.target.src;
+  displayedImage.alt = e.target.alt;
+}
