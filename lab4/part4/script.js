@@ -70,7 +70,7 @@ testBall.x;
 testBall.size;
 testBall.color;
 testBall.draw();
-
+// ANimating the balls
 const balls = [];
 
 while (balls.length < 25) {
