@@ -38,7 +38,10 @@ const events = ["spontaneously combusted",
 
 function returnRandomStoryString() {
   // It was 94 Fahrenheit outside, so :insertx: went for a walk. When they got to :inserty:, they stared in horror for a few moments, then :insertz:. Bob saw the whole thing, but was not surprised — :insertx: weighs 300 pounds, and it was a hot day.
-
+  const randomCharacter = randomValueFromArray(characters);
+  const randomPlace = randomValueFromArray(places);
+  const randomEvent = randomValueFromArray(events);
+  let storyText = `It was 94 Fahrenheit outside, so ${randomCharacter} went for a walk. When they got to ${randomPlace}, they stared in horror for a few moments, then ${randomEvent}. Bob saw the whole thing, but was not surprised — ${randomCharacter} weighs 300 pounds, and it was a hot day.`;
   return storyText;
 }
 
@@ -49,11 +52,16 @@ generateBtn.addEventListener("click", generateStory);
 function generateStory() {
   if (customName.value !== "") {
     const name = customName.value;
+    newStory = newStory.replace("Bob", name);
+
   }
 
   if (document.getElementById("uk").checked) {
-    const weight = Math.round(300);
-    const temperature = Math.round(94);
+    const weight = `${  Math.round(300 / 14.5833)} stone`;
+    const temperature = `${Math.round(94 - 32) * 5 / 9} celsius`;
+    newStory = newStory.replace("300 pounds", weight);
+    newStory = newStory.replace("94 Fahrenheit", temperature);
+
   }
 
   // TODO: replace "" with the correct expression
