@@ -4,62 +4,54 @@ const thumbBar = document.querySelector(".thumb-bar");
 const btn = document.querySelector("button");
 const overlay = document.querySelector(".overlay");
 
-// create array of objects called images.
+// Array of image objects
 const images = [
-{ filename: "pic1.jpg", alt: "Close-up of a human eye" },
-{ filename: "pic2.jpg", alt: "Rock that looks like a wave" },
-{ filename: "pic3.jpg", alt: "Purple and white pansies" },
-{ filename: "pic4.jpg", alt: "Section of wall from a pharaoh's tomb" },
-{ filename: "pic5.jpg", alt: "Large moth on a leaf" },
+  { filename: "pic1.jpg", alt: "Close-up of a human eye" },
+  { filename: "pic2.jpg", alt: "Rock that looks like a wave" },
+  { filename: "pic3.jpg", alt: "Purple and white pansies" },
+  { filename: "pic4.jpg", alt: "Section of wall from a pharaoh's tomb" },
+  { filename: "pic5.jpg", alt: "Large moth on a leaf" },
 ];
 
 // Base URL for images
-const baseURL = "https://mdn.github.io/shared-assets/images/examples/learn/gallery/pic1.jpg";
+const baseURL = "https://mdn.github.io/shared-assets/images/examples/learn/gallery/"
 
-// Looping through images array
-for (const image of images) {
-  const newImage = document.createElement("img");
- 
-  newImage.src = baseURL + image.filename;
-  newImage.alt = imgData.alt;
-  
-  // Make the image focusable via the keyboard
-  newImage.tabIndex = "0";
-
-  // Append the image as a child of the thumbBar
-  thumbBar.appendChild(newImage);
-
-  // Update the display to show the image full size when a thumb is clicked
-  newImage.addEventListener("click", updateDisplayedImage);
-
-  // Update the display to show the image full size when a thumb is focused and Enter is pressed
-  newImage.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-      updateDisplayedImage.call(newImage);
-    }
-  });
-}
-
-//Create function to update displayed image
-
+// Function to update displayed image
 function updateDisplayedImage(e) {
   displayedImage.src = e.target.src;
   displayedImage.alt = e.target.alt;
 }
 
-// Wire up the button for the darken/lighten effect 
+// Loop through images array
+for (const image of images) {
+  const newImage = document.createElement("img");
 
-// Add a click event listener on the button
+  newImage.src = `${baseURL}${image.filename}`;
+  newImage.alt = image.alt;
+
+  // Make the image focusable via keyboard
+  newImage.tabIndex = "0";
+
+  // Append to thumb bar
+  thumbBar.appendChild(newImage);
+
+  // Event listeners
+  newImage.addEventListener("click", updateDisplayedImage);
+  newImage.addEventListener("keydown", (e) => {
+    if (e.code === "Enter") {
+      updateDisplayedImage(e);
+    }
+  });
+}
+
+// Darken/Lighten button toggle
 btn.addEventListener("click", () => {
-  // change text to "Lighten" and make the overlay darker if contains dark class
   if (btn.classList.contains("dark")) {
     btn.textContent = "Lighten";
     overlay.style.backgroundColor = "rgb(0 0 0 / 0.5)";
   } else {
-    // Else, change text to "Darken" and make the overlay lighter
     btn.textContent = "Darken";
     overlay.style.backgroundColor = "rgb(0 0 0 / 0)";
   }
-  // Toggle the class ready for the next button press
   btn.classList.toggle("dark");
 });
