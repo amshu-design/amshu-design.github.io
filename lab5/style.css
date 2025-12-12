@@ -248,3 +248,8 @@ audio {
 .comment-container li p:nth-child(2) {
   flex: 5;
 }
+
+.sr-only {
+  position: absolute;
+  left: -10000px;
+}
