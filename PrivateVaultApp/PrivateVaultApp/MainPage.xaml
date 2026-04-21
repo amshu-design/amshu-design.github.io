@@ -1,0 +1,22 @@
+﻿<VerticalStackLayout Padding="30" Spacing="20">
+
+    <Label 
+        Text="🔐 Private Vault"
+        FontSize="28"
+        HorizontalOptions="Center" />
+
+    <Entry 
+        x:Name="passwordEntry"
+        Placeholder="Enter Master Password"
+        IsPassword="True" />
+
+    <Button 
+        Text="Unlock Vault"
+        Clicked="OnLoginClicked" />
+
+    <Label 
+        x:Name="messageLabel"
+        TextColor="Red"
+        HorizontalOptions="Center" />
+
+</VerticalStackLayout>
