@@ -1,5 +1,4 @@
 ﻿
-
 namespace PrivateVaultApp
 {
     public partial class MainPage : ContentPage

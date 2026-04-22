@@ -22,7 +22,8 @@
             HorizontalOptions="FillAndExpand"/>
 
         <Button
-        Text="👁"
+        x:Name="toggleButton"
+        Text="Show"
         Clicked="OnTogglePassword" />
 
         <Button

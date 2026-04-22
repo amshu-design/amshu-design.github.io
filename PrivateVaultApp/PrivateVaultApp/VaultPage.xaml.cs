@@ -1,6 +1,8 @@
+using System;
 using System.Text.Json;
 using System.IO;
 using System.Collections.Generic;
+using Microsoft.Maui.Controls;
 
 namespace PrivateVaultApp;
 
@@ -9,6 +11,12 @@ public partial class VaultPage : ContentPage
     List<VaultItem> items = new List<VaultItem>();
 
     string filePath = Path.Combine(FileSystem.AppDataDirectory, "vault.json");
+
+    public VaultPage()
+    {
+        InitializeComponent();
+        LoadData();
+    }
     void SaveData()
     {
         var json = JsonSerializer.Serialize(items);
@@ -24,12 +32,6 @@ public partial class VaultPage : ContentPage
             
         }
         vaultList.ItemsSource = items;
-    }
-
-    public VaultPage()
-    {
-        InitializeComponent();
-        LoadData();
     }
 
     private void OnAddClicked(object sender, EventArgs e)
@@ -67,10 +69,14 @@ public partial class VaultPage : ContentPage
     private void OnTogglePassword(object sender, EventArgs e)
     {
         secretEntry.IsPassword = !secretEntry.IsPassword;
+
+       var button = sender as Button;
+        if (button != null)
+        {
+            button.Text = secretEntry.IsPassword ? "Show" : "Hide";
+        }
     }
 }
-
-
 public class VaultItem
 {
     public string? Title { get; set; }
