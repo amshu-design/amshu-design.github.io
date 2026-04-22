@@ -44,15 +44,27 @@ public partial class VaultPage : ContentPage
             });
 
             SaveData();
-
             vaultList.ItemsSource = null;
             vaultList.ItemsSource = items;
-
             titleEntry.Text = "";
             secretEntry.Text = "";
         }
     }
+
+    private void OnDeleteClicked(object sender, EventArgs e)
+    {
+        var button = sender as Button;
+        var item = button?.BindingContext as VaultItem;
+        if (item != null)
+        {
+            items.Remove(item);
+            SaveData();
+            vaultList.ItemsSource = null;
+            vaultList.ItemsSource = items;
+        }
+    }
 }
+
 
 public class VaultItem
 {

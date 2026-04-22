@@ -31,6 +31,11 @@
                         <VerticalStackLayout>
                             <Label Text="{Binding Title}" FontAttributes="Bold" />
                             <Label Text="{Binding SecretText}" />
+
+                            <Button
+                                Text="Delete"
+                                Clicked="OnDeleteClicked"
+                                CommandParameter="{Binding .}" />
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>
