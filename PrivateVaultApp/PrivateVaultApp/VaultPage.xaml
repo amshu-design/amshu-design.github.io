@@ -18,7 +18,12 @@
         <Entry
             x:Name="secretEntry"
             Placeholder="Enter Secret"
-            IsPassword="True" />
+            IsPassword="True"
+            HorizontalOptions="FillAndExpand"/>
+
+        <Button
+        Text="👁"
+        Clicked="OnTogglePassword" />
 
         <Button
             Text="Add Secret"

@@ -63,6 +63,11 @@ public partial class VaultPage : ContentPage
             vaultList.ItemsSource = items;
         }
     }
+
+    private void OnTogglePassword(object sender, EventArgs e)
+    {
+        secretEntry.IsPassword = !secretEntry.IsPassword;
+    }
 }
 
 
