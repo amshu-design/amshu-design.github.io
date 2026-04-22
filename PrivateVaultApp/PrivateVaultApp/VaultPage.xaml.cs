@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.IO;
 using System.Collections.Generic;
 
 namespace PrivateVaultApp;
@@ -5,6 +7,23 @@ namespace PrivateVaultApp;
 public partial class VaultPage : ContentPage
 {
     List<VaultItem> items = new List<VaultItem>();
+
+    string filePath = Path.Combine(FileSystem.AppDataDirectory, "vault.json");
+    void SaveData()
+    {
+        var json = JsonSerializer.Serialize(items);
+        File.WriteAllText(filePath, json);
+    }
+
+    void LoadData()
+    {
+        if (File.Exists(filePath))
+        {
+            var json = File.ReadAllText(filePath);
+            items = JsonSerializer.Deserialize<List<VaultItem>>(json) ?? new List<VaultItem>();
+            vaultList.ItemsSource = items;
+        }
+    }
 
     public VaultPage()
     {
