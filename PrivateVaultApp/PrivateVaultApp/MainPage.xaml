@@ -1,22 +1,28 @@
-﻿<VerticalStackLayout Padding="30" Spacing="20">
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PrivateVaultApp.MainPage">
+	
+	<VerticalStackLayout Padding="30" Spacing="20">
 
-    <Label 
-        Text=" Private Vault"
-        FontSize="28"
-        HorizontalOptions="Center" />
+		<Label
+			Text=" Private Vault"
+			FontSize="28"
+			HorizontalOptions="Center" />
 
-    <Entry 
-        x:Name="passwordEntry"
-        Placeholder="Enter Master Password"
-        IsPassword="True" />
+		<Entry
+			x:Name="passwordEntry"
+			Placeholder="Enter Master Password"
+			IsPassword="True" />
 
-    <Button 
-        Text="Unlock Vault"
-        Clicked="OnLoginClicked" />
+		<Button
+			Text="Unlock Vault"
+			Clicked="OnLoginClicked" />
 
-    <Label 
-        x:Name="messageLabel"
-        TextColor="Red"
-        HorizontalOptions="Center" />
+		<Label
+			x:Name="messageLabel"
+			TextColor="Red"
+			HorizontalOptions="Center" />
 
-</VerticalStackLayout>
+	</VerticalStackLayout>
+</ContentPage>

@@ -1,4 +1,4 @@
-﻿using static Android.Webkit.ConsoleMessage;
+﻿
 
 namespace PrivateVaultApp
 {
@@ -20,7 +20,7 @@ namespace PrivateVaultApp
             else
             {
                 messageLabel.TextColor = Colors.Red;
-                messageLabel.Text = "Wrong Password ❌";
+                messageLabel.Text = "Wrong Password";
             }
         }
     }
