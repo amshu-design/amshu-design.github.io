@@ -1,7 +1,7 @@
 ﻿<VerticalStackLayout Padding="30" Spacing="20">
 
     <Label 
-        Text="🔐 Private Vault"
+        Text=" Private Vault"
         FontSize="28"
         HorizontalOptions="Center" />
 
