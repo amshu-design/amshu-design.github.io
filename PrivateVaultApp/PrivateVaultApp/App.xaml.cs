@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace PrivateVaultApp
+﻿namespace PrivateVaultApp
 {
     public partial class App : Application
     {
@@ -8,11 +6,10 @@ namespace PrivateVaultApp
         {
             InitializeComponent();
         }
-        
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new AppShell());
+            return new Window(new NavigationPage(new MainPage()));
         }
     }
 }

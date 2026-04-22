@@ -10,6 +10,7 @@ namespace PrivateVaultApp
         {
             InitializeComponent();
         }
+
         private async void OnLoginClicked(object sender, EventArgs e)
         {
             if (passwordEntry.Text == masterPassword)
@@ -22,7 +23,5 @@ namespace PrivateVaultApp
                 messageLabel.Text = "Wrong Password ❌";
             }
         }
-
-
     }
 }

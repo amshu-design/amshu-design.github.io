@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PrivateVaultApp.VaultPage"
+             Title="VaultPage">
+
+    <VerticalStackLayout Padding="30" Spacing="15">
+
+        <Label
+            Text="🔐 My Vault"
+            FontSize="26"
+            HorizontalOptions="Center" />
+
+        <Entry
+            x:Name="titleEntry"
+            Placeholder="Enter Title (e.g. Gmail)" />
+
+        <Entry
+            x:Name="secretEntry"
+            Placeholder="Enter Secret"
+            IsPassword="True" />
+
+        <Button
+            Text="Add Secret"
+            Clicked="OnAddClicked" />
+
+        <CollectionView x:Name="vaultList">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="Gray" Padding="10" Margin="5">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Title}" FontAttributes="Bold" />
+                            <Label Text="{Binding SecretText}" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>
