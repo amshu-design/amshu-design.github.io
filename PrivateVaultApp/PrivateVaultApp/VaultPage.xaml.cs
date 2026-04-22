@@ -3,71 +3,104 @@ using System.Text.Json;
 using System.IO;
 using System.Collections.Generic;
 using Microsoft.Maui.Controls;
+using System.Linq.Expressions;
 
 namespace PrivateVaultApp;
 
 public partial class VaultPage : ContentPage
 {
-    List<VaultItem> items = new List<VaultItem>();
-
-    string filePath = Path.Combine(FileSystem.AppDataDirectory, "vault.json");
+    private List<VaultItem> items = new List<VaultItem>();
+    private string filePath = Path.Combine(FileSystem.AppDataDirectory, "vault.json");
 
     public VaultPage()
     {
         InitializeComponent();
         LoadData();
     }
-    void SaveData()
+    private async void SaveData()
     {
-        var json = JsonSerializer.Serialize(items);
-        File.WriteAllText(filePath, json);
-    }
+        try
 
-    void LoadData()
-    {
-        if (File.Exists(filePath))
         {
-            var json = File.ReadAllText(filePath);
-            items = JsonSerializer.Deserialize<List<VaultItem>>(json) ?? new List<VaultItem>();
-            
+            var json = JsonSerializer.Serialize(items);
+            File.WriteAllText(filePath, json);
         }
-        vaultList.ItemsSource = items;
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"Failed to save data: {ex.Message}", "OK");
+        }
     }
 
-    private void OnAddClicked(object sender, EventArgs e)
+   private async void LoadData()
     {
-        if (!string.IsNullOrWhiteSpace(titleEntry.Text) &&
-            !string.IsNullOrWhiteSpace(secretEntry.Text))
+        try
         {
-            items.Add(new VaultItem
+            if (File.Exists(filePath))
             {
-                Title = titleEntry.Text,
-                SecretText = secretEntry.Text
-            });
+                var json = File.ReadAllText(filePath);
+                items = JsonSerializer.Deserialize<List<VaultItem>>(json) ?? new List<VaultItem>();
 
-            SaveData();
-            vaultList.ItemsSource = null;
+            }
             vaultList.ItemsSource = items;
-            titleEntry.Text = "";
-            secretEntry.Text = "";
         }
-    }
-
-    private void OnDeleteClicked(object sender, EventArgs e)
-    {
-        var button = sender as Button;
-        var item = button?.BindingContext as VaultItem;
-        if (item != null)
+        catch (Exception ex)
         {
-            items.Remove(item);
-            SaveData();
-            vaultList.ItemsSource = null;
-            vaultList.ItemsSource = items;
+            await DisplayAlert("Error", $"Failed to load data: {ex.Message}", "OK");
+            items = new List<VaultItem>();
+                vaultList.ItemsSource = items;
         }
     }
+
+    private async void OnAddClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            if (!string.IsNullOrWhiteSpace(titleEntry.Text) &&
+                !string.IsNullOrWhiteSpace(secretEntry.Text))
+            {
+                items.Add(new VaultItem
+                {
+                    Title = titleEntry.Text,
+                    SecretText = secretEntry.Text
+                });
+
+                SaveData();
+                vaultList.ItemsSource = null;
+                vaultList.ItemsSource = items;
+                titleEntry.Text = "";
+                secretEntry.Text = "";
+                await DisplayAlert("Success", "Vault item added successfully.", "OK");
+            }
+        }
+               catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"Failed to add item: {ex.Message}", "OK");
+        }
+    }
+
+    private async Task OnDeleteClicked(object sender, EventArgs e)
+    {
+        try {
+            var button = sender as Button;
+            var item = button?.BindingContext as VaultItem;
+            if (item != null)
+            {
+                items.Remove(item);
+                SaveData();
+                vaultList.ItemsSource = null;
+                vaultList.ItemsSource = items;
+            }
+        }
+                catch (Exception ex)
+        {
+           await DisplayAlert("Error", $"Failed to delete item: {ex.Message}", "OK");
+        }
+    }
+
 
     private void OnTogglePassword(object sender, EventArgs e)
     {
+        try { 
         secretEntry.IsPassword = !secretEntry.IsPassword;
 
        var button = sender as Button;
@@ -75,7 +108,10 @@ public partial class VaultPage : ContentPage
         {
             button.Text = secretEntry.IsPassword ? "Show" : "Hide";
         }
-    }
+        }
+        catch (Exception)
+        {
+        }
 }
 public class VaultItem
 {
