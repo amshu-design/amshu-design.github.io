@@ -21,18 +21,15 @@ public partial class VaultPage : ContentPage
         {
             var json = File.ReadAllText(filePath);
             items = JsonSerializer.Deserialize<List<VaultItem>>(json) ?? new List<VaultItem>();
-            vaultList.ItemsSource = items;
+            
         }
+        vaultList.ItemsSource = items;
     }
 
     public VaultPage()
     {
         InitializeComponent();
-
-        items.Add(new VaultItem { Title = "Email", SecretText = "mypassword123" });
-        items.Add(new VaultItem { Title = "Bank", SecretText = "secure456" });
-
-        vaultList.ItemsSource = items;
+        LoadData();
     }
 
     private void OnAddClicked(object sender, EventArgs e)
@@ -45,6 +42,8 @@ public partial class VaultPage : ContentPage
                 Title = titleEntry.Text,
                 SecretText = secretEntry.Text
             });
+
+            SaveData();
 
             vaultList.ItemsSource = null;
             vaultList.ItemsSource = items;
